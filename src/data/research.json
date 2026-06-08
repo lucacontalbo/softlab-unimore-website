@@ -1,0 +1,56 @@
+[
+  {
+    "id": "entity-matching",
+    "title": "Entity Matching & Data Integration",
+    "description": "We develop scalable techniques for automatically identifying records that refer to the same real-world entity across heterogeneous data sources. Our approaches leverage pre-trained language models (BERT, LLMs), graph neural networks, and active learning to achieve state-of-the-art accuracy with minimal human supervision.",
+    "icon": "GitMerge",
+    "color": "#0891b2",
+    "topics": ["Entity Resolution", "Record Linkage", "Deduplication", "Schema Matching", "Data Fusion", "BERT for EM"],
+    "order": 1
+  },
+  {
+    "id": "nlp-text-analytics",
+    "title": "NLP & Text Analytics",
+    "description": "Our NLP research spans information extraction, fact verification, document classification, and large language model applications. We work on structured and unstructured data from domains including finance (ESG reporting), healthcare, and scientific literature.",
+    "icon": "MessageSquare",
+    "color": "#7c3aed",
+    "topics": ["Information Extraction", "Fact Verification", "Document Classification", "LLMs", "ESG Analytics", "Question Answering"],
+    "order": 2
+  },
+  {
+    "id": "time-series",
+    "title": "Time Series Analysis",
+    "description": "We investigate representation learning, clustering, and anomaly detection for multivariate time series data, with applications in industrial monitoring, predictive maintenance, and energy systems. Our flagship project time2feat learns interpretable feature representations for time series clustering.",
+    "icon": "TrendingUp",
+    "color": "#059669",
+    "topics": ["Time Series Clustering", "Anomaly Detection", "Representation Learning", "Predictive Maintenance", "Industrial IoT"],
+    "order": 3
+  },
+  {
+    "id": "ml-in-databases",
+    "title": "ML in Database Systems",
+    "description": "We explore the integration of machine learning inference directly within database management systems, enabling efficient in-database analytics without data movement overhead. This line of research bridges the gap between database query processing and modern ML frameworks.",
+    "icon": "Database",
+    "color": "#d97706",
+    "topics": ["In-database ML", "Query Optimization", "ML Inference", "Declarative ML", "Big Data Analytics"],
+    "order": 4
+  },
+  {
+    "id": "anomaly-detection",
+    "title": "Anomaly & Novelty Detection",
+    "description": "We design and evaluate unsupervised and semi-supervised algorithms for detecting anomalies and novel patterns in complex data streams. Our autoencoder-based methods are deployed in real industrial environments for health monitoring and predictive maintenance.",
+    "icon": "AlertTriangle",
+    "color": "#dc2626",
+    "topics": ["Autoencoder-based Detection", "Unsupervised Learning", "System Health Monitoring", "Industrial AI", "Streaming Data"],
+    "order": 5
+  },
+  {
+    "id": "knowledge-graphs",
+    "title": "Knowledge Graphs & Semantic Web",
+    "description": "We build and exploit knowledge graphs for data integration, semantic search, and question answering. Our research addresses ontology alignment, knowledge base population, and keyword-based search over structured datasets using semantic reasoning.",
+    "icon": "Share2",
+    "color": "#0f766e",
+    "topics": ["Ontology Alignment", "Knowledge Base Population", "Semantic Search", "Keyword Search", "Linked Data"],
+    "order": 6
+  }
+]

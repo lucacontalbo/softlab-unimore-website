@@ -1,0 +1,57 @@
+[
+  {
+    "id": "clariesg-ecir-2024",
+    "slug": "clariesg-accepted-ecir-2024",
+    "title": "ClariESG Accepted at ECIR 2024",
+    "date": "2024-02-10",
+    "category": "Publication",
+    "excerpt": "Our paper on ESG information extraction from financial documents using large language models has been accepted at the European Conference on Information Retrieval (ECIR) 2024 in Glasgow.",
+    "content": "<p>We are thrilled to announce that our paper <strong>\"ClariESG: Clarifying ESG Information Extraction from Financial Documents using Large Language Models\"</strong> has been accepted at the <strong>46th European Conference on Information Retrieval (ECIR 2024)</strong>, to be held in Glasgow, UK.</p><p>This work, led by PhD student Sara Pederzoli in collaboration with Prof. Francesco Guerra and Michele Luca Contalbo, presents a novel system for automatically extracting and classifying Environmental, Social, and Governance (ESG) information from corporate financial filings and sustainability reports.</p><p>The ClariESG system leverages state-of-the-art large language models combined with a domain-specific ESG ontology to identify relevant disclosures across heterogeneous document formats. Experimental results demonstrate significant improvements over existing baselines on a newly curated benchmark dataset.</p><p>The paper will be presented at the conference in March 2024. A preprint is available on arXiv.</p>",
+    "featured": true,
+    "author": "SoftLab"
+  },
+  {
+    "id": "noctowl-icde-2024",
+    "slug": "noctowl-accepted-icde-2024",
+    "title": "NOCTOWL Paper Accepted at IEEE ICDE 2024",
+    "date": "2024-01-15",
+    "category": "Publication",
+    "excerpt": "Our new time series change-point detection method, NOCTOWL, has been accepted at the IEEE International Conference on Data Engineering (ICDE) 2024.",
+    "content": "<p>SoftLab is pleased to announce the acceptance of our paper <strong>\"NOCTOWL: Non-parametric Online Change-point detection for Time Series with Wavelet-based Learning\"</strong> at the <strong>IEEE International Conference on Data Engineering (ICDE) 2024</strong>, one of the premier venues for data management and engineering research.</p><p>The paper introduces NOCTOWL, a novel approach to detecting change points in streaming time series data. Unlike existing methods, NOCTOWL uses wavelet decomposition to capture multi-scale temporal patterns and operates in an online fashion without requiring labeled training data.</p><p>This work was a collaboration between Paolo Sottovia, Prof. Francesco Guerra, and Andrea Ferretti, and demonstrates SoftLab's ongoing commitment to advancing the state-of-the-art in time series analytics.</p>",
+    "featured": false,
+    "author": "SoftLab"
+  },
+  {
+    "id": "new-project-2024",
+    "slug": "new-funded-project-2024",
+    "title": "SoftLab Receives Funding for AI-Powered Data Quality Project",
+    "date": "2023-12-01",
+    "category": "Event",
+    "excerpt": "SoftLab has been awarded a new research grant to develop AI-powered tools for automatic data quality assessment and repair in large-scale enterprise data lakes.",
+    "content": "<p>We are excited to share that SoftLab has received a new research grant from the Italian Ministry of University and Research (MUR) as part of the PRIN 2023 programme, for a project titled <strong>\"AutoDQ: Automated Data Quality Assessment and Repair using Foundation Models\"</strong>.</p><p>The AutoDQ project will run for three years (2024–2026) and aims to develop a suite of AI-powered tools that can automatically detect, diagnose, and repair data quality issues in large-scale enterprise data lakes. The project will leverage recent advances in foundation models and transfer learning to handle diverse data modalities and heterogeneous schemas.</p><p>Prof. Francesco Guerra will serve as Principal Investigator, with the full SoftLab team contributing to different aspects of the research. The project also involves collaboration with partners from industry and other Italian universities.</p><p>We look forward to sharing our progress and results with the research community over the coming years!</p>",
+    "featured": true,
+    "author": "Francesco Guerra"
+  },
+  {
+    "id": "time2feat-vldb-2023",
+    "slug": "time2feat-vldb-2023",
+    "title": "time2feat Presented at VLDB 2023 in Vancouver",
+    "date": "2023-08-30",
+    "category": "Event",
+    "excerpt": "Paolo Sottovia presented the time2feat paper at the 49th International Conference on Very Large Data Bases (VLDB 2023) in Vancouver, Canada.",
+    "content": "<p>SoftLab had a strong presence at <strong>VLDB 2023</strong>, the 49th International Conference on Very Large Data Bases, held in Vancouver, Canada from August 28 to September 1, 2023.</p><p>Paolo Sottovia presented our paper <strong>\"time2feat: Extracting Interpretable Features from Multivariate Time Series\"</strong> to an engaged audience of researchers and practitioners from around the world. The presentation sparked lively discussion about interpretability in time series analysis and the importance of feature engineering for downstream tasks.</p><p>The time2feat system is now available as open-source software on our <a href='https://github.com/softlab-unimore/time2feat' class='text-cyan-600 hover:underline'>GitHub repository</a>. We welcome contributions and feedback from the community.</p><p>We are grateful to VLDB 2023 organizers for a wonderful conference and to all attendees who engaged with our work!</p>",
+    "featured": false,
+    "author": "Paolo Sottovia"
+  },
+  {
+    "id": "em-survey-award-2022",
+    "slug": "entity-matching-survey-highly-cited-2022",
+    "title": "Entity Matching Survey Recognized Among Most-Cited Papers",
+    "date": "2022-11-20",
+    "category": "Award",
+    "excerpt": "Our comprehensive survey on entity matching over relational data, published in ACM Computing Surveys, has been recognized as one of the most-cited papers in data integration research.",
+    "content": "<p>We are proud to announce that our paper <strong>\"A Comprehensive Survey of Entity Matching over Relational Data\"</strong>, published in <em>ACM Computing Surveys</em> in 2021, has been recognized as one of the most frequently cited works in the field of data integration over the past two years.</p><p>The survey, authored by Matteo Paganelli and Prof. Francesco Guerra, provides a thorough overview of entity matching techniques ranging from classical rule-based and blocking methods to modern deep learning approaches. It has become a standard reference for researchers and practitioners entering the field.</p><p>With over 80 citations within its first year of publication, the survey reflects the growing interest in entity matching as a core challenge in data management and AI systems. We are thankful to the community for the warm reception and continued interest in this work.</p><p>The survey is freely available via <a href='https://dl.acm.org/doi/10.1145/3468673' class='text-cyan-600 hover:underline'>ACM Digital Library</a>.</p>",
+    "featured": true,
+    "author": "Matteo Paganelli"
+  }
+]
