@@ -3,7 +3,8 @@ import { ArrowRight, Quote, ExternalLink } from "lucide-react";
 import type { Publication } from "@/lib/data";
 
 export default function FeaturedPublications({ publications }: { publications: Publication[] }) {
-  const featured = publications.filter((p) => p.featured).slice(0, 3);
+  const featuredOnly = publications.filter((p) => p.featured);
+  const featured = (featuredOnly.length > 0 ? featuredOnly : publications).slice(0, 3);
 
   return (
     <section className="py-24 bg-white">

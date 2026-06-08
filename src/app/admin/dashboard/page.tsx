@@ -40,13 +40,13 @@ function FieldInput({ label, value, onChange, type = "text", placeholder = "" }:
       <span className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1 block">{label}</span>
       {type === "textarea" ? (
         <textarea
-          className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#003B71]/30 focus:border-[#003B71] resize-y min-h-[80px]"
+          className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-cyan-500/30 focus:border-cyan-500 resize-y min-h-[80px]"
           value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder}
         />
       ) : (
         <input
           type={type}
-          className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#003B71]/30 focus:border-[#003B71]"
+          className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-cyan-500/30 focus:border-cyan-500"
           value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder}
         />
       )}
@@ -92,7 +92,7 @@ export default function AdminDashboard() {
       research: () => fetch("/api/admin/research").then(r => r.json()).then(setResearch),
       projects: () => fetch("/api/admin/projects").then(r => r.json()).then(setProjects),
       consulting: () => fetch("/api/admin/consulting").then(r => r.json()).then(setConsulting),
-      publications: () => fetch("/api/publications/list").then(r => r.json()).then(setPublications),
+      publications: () => fetch("/api/admin/publications").then(r => r.json()).then(setPublications),
     };
     loaders[tab]?.();
   }, [tab]);
@@ -115,11 +115,48 @@ export default function AdminDashboard() {
     const r = await fetch("/api/publications/refresh", { method: "POST" });
     setRefreshingPubs(false);
     if (r.ok) {
-      showToast("success", "Publications refreshed!");
-      fetch("/api/publications/list").then(res => res.json()).then(setPublications);
+      const body = await r.json();
+      showToast("success", `Fetched ${body.count ?? "?"} publications from Scholar!`);
+      fetch("/api/admin/publications").then(res => res.json()).then(setPublications);
     } else {
-      showToast("error", "Refresh failed. Check Scholar settings.");
+      const body = await r.json().catch(() => ({}));
+      showToast("error", body.error ?? "Refresh failed. Check Scholar settings.");
     }
+  }
+
+  // ---- Publications helpers ----
+  const [editPubId,  setEditPubId]  = useState<string | null>(null);
+  const [addingPub,  setAddingPub]  = useState(false);
+  const [newPub, setNewPub] = useState<Partial<Publication>>({
+    title: "", authors: [], venue: "", year: new Date().getFullYear(),
+    citations: 0, abstract: "", doi: null, url: null, tags: [], featured: false,
+  });
+
+  function toggleFeatured(id: string) {
+    setPublications(prev => prev.map(p => p.id === id ? { ...p, featured: !p.featured } : p));
+  }
+  function deletePub(id: string) {
+    setPublications(prev => prev.filter(p => p.id !== id));
+  }
+  function addPub() {
+    if (!newPub.title?.trim()) return;
+    const pub: Publication = {
+      id: genId(),
+      title: newPub.title ?? "",
+      authors: newPub.authors ?? [],
+      venue: newPub.venue ?? "",
+      year: newPub.year ?? new Date().getFullYear(),
+      citations: newPub.citations ?? 0,
+      abstract: newPub.abstract ?? "",
+      doi: newPub.doi ?? null,
+      url: newPub.url ?? null,
+      tags: newPub.tags ?? [],
+      featured: newPub.featured ?? false,
+    };
+    setPublications(prev => [pub, ...prev]);
+    setNewPub({ title: "", authors: [], venue: "", year: new Date().getFullYear(), citations: 0, abstract: "", doi: null, url: null, tags: [], featured: false });
+    setAddingPub(false);
+    showToast("success", "Paper added — click Save to persist.");
   }
 
   function addTeamMember() {
@@ -523,34 +560,110 @@ export default function AdminDashboard() {
         {/* ---- PUBLICATIONS ---- */}
         {tab === "publications" && (
           <div className="max-w-3xl">
-            <div className="flex items-center justify-between mb-6">
+            {/* Header */}
+            <div className="flex flex-wrap items-start justify-between gap-3 mb-6">
               <div>
                 <h1 className="text-2xl font-bold text-slate-900">Publications</h1>
-                <p className="text-sm text-slate-500 mt-1">Auto-fetched from Google Scholar. {publications.length} publication{publications.length !== 1 ? "s" : ""} loaded.</p>
+                <p className="text-sm text-slate-500 mt-1">
+                  {publications.length} paper{publications.length !== 1 ? "s" : ""}
+                  {" · "}{publications.filter(p => p.featured).length} featured
+                </p>
               </div>
-              <button onClick={refreshPublications} disabled={refreshingPubs} className="btn-primary">
-                <RefreshCw className={`w-4 h-4 ${refreshingPubs ? "animate-spin" : ""}`} />
-                {refreshingPubs ? "Refreshing…" : "Refresh from Scholar"}
-              </button>
+              <div className="flex gap-2 flex-wrap">
+                <button onClick={() => setAddingPub(v => !v)}
+                  className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-white text-sm font-medium transition-colors">
+                  <Plus className="w-4 h-4" /> Add Manually
+                </button>
+                <button onClick={refreshPublications} disabled={refreshingPubs}
+                  className="btn-primary">
+                  <RefreshCw className={`w-4 h-4 ${refreshingPubs ? "animate-spin" : ""}`} />
+                  {refreshingPubs ? "Refreshing…" : "Refresh from Scholar"}
+                </button>
+              </div>
             </div>
+
+            {/* Add manually form */}
+            {addingPub && (
+              <div className="bg-blue-50 border border-blue-100 rounded-2xl p-5 mb-5 space-y-3">
+                <p className="text-sm font-semibold text-slate-700 mb-1">Add paper manually</p>
+                <FieldInput label="Title *" value={newPub.title ?? ""} onChange={v => setNewPub(p => ({...p, title: v}))} />
+                <FieldInput label="Authors (comma-separated)" value={(newPub.authors ?? []).join(", ")}
+                  onChange={v => setNewPub(p => ({...p, authors: v.split(",").map(s => s.trim()).filter(Boolean)}))} />
+                <div className="grid grid-cols-2 gap-3">
+                  <FieldInput label="Venue / Journal" value={newPub.venue ?? ""} onChange={v => setNewPub(p => ({...p, venue: v}))} />
+                  <FieldInput label="Year" value={String(newPub.year ?? "")} onChange={v => setNewPub(p => ({...p, year: Number(v)}))} type="number" />
+                </div>
+                <div className="grid grid-cols-2 gap-3">
+                  <FieldInput label="DOI (optional)" value={newPub.doi ?? ""} onChange={v => setNewPub(p => ({...p, doi: v || null}))} />
+                  <FieldInput label="URL (optional)" value={newPub.url ?? ""} onChange={v => setNewPub(p => ({...p, url: v || null}))} />
+                </div>
+                <FieldInput label="Tags (comma-separated)" value={(newPub.tags ?? []).join(", ")}
+                  onChange={v => setNewPub(p => ({...p, tags: v.split(",").map(s => s.trim()).filter(Boolean)}))} />
+                <div className="flex items-center gap-2">
+                  <input type="checkbox" id="newFeatured" checked={newPub.featured ?? false}
+                    onChange={e => setNewPub(p => ({...p, featured: e.target.checked}))}
+                    className="w-4 h-4 rounded accent-cyan-600" />
+                  <label htmlFor="newFeatured" className="text-sm text-slate-700 font-medium">Feature on home page</label>
+                </div>
+                <div className="flex gap-2 pt-1">
+                  <button onClick={addPub} className="btn-primary text-sm py-2 px-4"><Plus className="w-4 h-4" /> Add Paper</button>
+                  <button onClick={() => setAddingPub(false)}
+                    className="px-4 py-2 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 text-sm transition-colors">Cancel</button>
+                </div>
+              </div>
+            )}
+
+            {/* Save / empty state */}
             {publications.length === 0 ? (
               <div className="bg-white rounded-2xl border border-slate-100 p-10 text-center">
                 <BookOpen className="w-12 h-12 text-slate-300 mx-auto mb-3" />
-                <p className="text-slate-500 font-medium">No publications loaded yet.</p>
-                <p className="text-slate-400 text-sm mt-1">Click &quot;Refresh from Scholar&quot; to fetch publications from Google Scholar, or wait for the weekly automated update.</p>
+                <p className="text-slate-500 font-medium">No publications yet.</p>
+                <p className="text-slate-400 text-sm mt-1">Use &quot;Refresh from Scholar&quot; or add papers manually.</p>
               </div>
             ) : (
-              <div className="space-y-2">
-                {publications.slice(0, 50).map(p => (
-                  <div key={p.id} className="bg-white rounded-xl border border-slate-100 px-5 py-3">
-                    <p className="font-medium text-slate-800 text-sm">{p.title}</p>
-                    <p className="text-xs text-slate-400 mt-0.5">{p.venue} · {p.year} · {p.citations} citations</p>
-                  </div>
-                ))}
-                {publications.length > 50 && (
-                  <p className="text-center text-slate-400 text-xs pt-2">Showing 50 of {publications.length}</p>
-                )}
-              </div>
+              <>
+                <div className="space-y-2 mb-5">
+                  {publications.map(p => (
+                    <div key={p.id}
+                      className={`bg-white rounded-xl border px-4 py-3 flex items-start gap-3 transition-colors ${p.featured ? "border-cyan-200 bg-cyan-50/30" : "border-slate-100"}`}>
+                      {/* Featured toggle */}
+                      <button
+                        onClick={() => toggleFeatured(p.id)}
+                        title={p.featured ? "Unfeature" : "Feature on home page"}
+                        className={`shrink-0 mt-0.5 w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors ${
+                          p.featured ? "border-cyan-500 bg-cyan-500" : "border-slate-300 hover:border-cyan-400"
+                        }`}>
+                        {p.featured && <CheckCircle className="w-3 h-3 text-white" />}
+                      </button>
+
+                      {/* Info */}
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-semibold text-slate-800 leading-snug">{p.title}</p>
+                        <p className="text-xs text-slate-400 mt-0.5 truncate">
+                          {p.venue}{p.venue && p.year ? " · " : ""}{p.year}
+                          {p.citations > 0 ? ` · ${p.citations} citations` : ""}
+                        </p>
+                      </div>
+
+                      {/* Delete */}
+                      <button onClick={() => deletePub(p.id)}
+                        className="shrink-0 p-1.5 rounded-lg hover:bg-red-50 text-slate-300 hover:text-red-500 transition-colors">
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="flex items-center gap-3">
+                  <button onClick={() => saveData("/api/admin/publications", publications, "Publications saved!")}
+                    disabled={saving} className="btn-primary">
+                    <Save className="w-4 h-4" /> {saving ? "Saving…" : "Save Changes"}
+                  </button>
+                  <p className="text-xs text-slate-400">
+                    Filled circle = shown on home page
+                  </p>
+                </div>
+              </>
             )}
           </div>
         )}
