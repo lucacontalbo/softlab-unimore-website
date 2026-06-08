@@ -1,14 +1,15 @@
 {
-  "name": "SoftLab",
-  "full_name": "Software Engineering & Data Analysis Laboratory",
+  "name": "DTALab",
+  "full_name": "Data and Text Analytics Laboratory",
   "university": "University of Modena and Reggio Emilia",
   "department": "Department of Engineering Enzo Ferrari",
   "address": "Via Pietro Vivarelli, 10, 41125 Modena MO, Italy",
-  "email": "softlab@unimore.it",
+  "email": "dtalab@unimore.it",
   "phone": "+39 059 2056360",
-  "about": "SoftLab (Software Engineering & Data Analysis Laboratory) is a research group at the Department of Engineering \"Enzo Ferrari\" of the University of Modena and Reggio Emilia. We conduct cutting-edge research at the intersection of data management, machine learning, and natural language processing. Our work spans entity matching, data integration, time series analysis, anomaly detection, and big data analytics, with the goal of advancing both the theoretical foundations and practical applications of data-driven systems.",
+  "about": "DTALab (Data and Text Analytics Laboratory) is a research group at the Department of Engineering \"Enzo Ferrari\" of the University of Modena and Reggio Emilia. We conduct cutting-edge research at the intersection of data management, machine learning, and natural language processing. Our work spans entity matching, data integration, text analytics, and big data analytics.",
   "founded": "2000",
   "twitter": "",
   "github": "https://github.com/softlab-unimore",
-  "linkedin": ""
+  "linkedin": "",
+  "scholar_url": "https://scholar.google.it/citations?user=A68h4-8AAAAJ&hl=it"
 }

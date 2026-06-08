@@ -8,7 +8,7 @@ function readJson<T>(filename: string): T {
   return JSON.parse(raw) as T;
 }
 
-function writeJson(filename: string, data: unknown): void {
+export function writeJson(filename: string, data: unknown): void {
   writeFileSync(join(DATA_DIR, filename), JSON.stringify(data, null, 2), "utf-8");
 }
 
@@ -25,19 +25,15 @@ export interface SiteConfig {
   twitter: string;
   github: string;
   linkedin: string;
+  scholar_url?: string;
 }
 
 export interface TeamMember {
   id: string;
   name: string;
-  role: string;
-  email: string;
-  bio: string;
-  research_interests: string[];
-  scholar_url: string | null;
-  github_url: string | null;
-  personal_url: string | null;
-  featured: boolean;
+  surname: string;
+  email?: string;
+  image?: string;
   order: number;
 }
 
@@ -77,14 +73,40 @@ export interface ResearchArea {
   order: number;
 }
 
+export interface Project {
+  id: string;
+  title: string;
+  description: string;
+  status: "active" | "completed" | "upcoming";
+  start_date: string;
+  end_date?: string;
+  funding?: string;
+  url?: string;
+  image?: string;
+  order: number;
+}
+
+export interface ConsultingItem {
+  id: string;
+  title: string;
+  description: string;
+  client?: string;
+  category: string;
+  order: number;
+}
+
 export const getSiteConfig = () => readJson<SiteConfig>("site.json");
 export const getTeam = () => readJson<TeamMember[]>("team.json");
 export const getPublications = () => readJson<Publication[]>("publications.json");
 export const getNews = () => readJson<NewsItem[]>("news.json");
 export const getResearchAreas = () => readJson<ResearchArea[]>("research.json");
+export const getProjects = () => readJson<Project[]>("projects.json");
+export const getConsulting = () => readJson<ConsultingItem[]>("consulting.json");
 
 export const saveSiteConfig = (data: SiteConfig) => writeJson("site.json", data);
 export const saveTeam = (data: TeamMember[]) => writeJson("team.json", data);
 export const savePublications = (data: Publication[]) => writeJson("publications.json", data);
 export const saveNews = (data: NewsItem[]) => writeJson("news.json", data);
 export const saveResearchAreas = (data: ResearchArea[]) => writeJson("research.json", data);
+export const saveProjects = (data: Project[]) => writeJson("projects.json", data);
+export const saveConsulting = (data: ConsultingItem[]) => writeJson("consulting.json", data);
