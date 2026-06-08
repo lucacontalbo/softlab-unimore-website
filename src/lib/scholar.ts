@@ -22,9 +22,8 @@ interface S2Paper {
 const S2_BASE = "https://api.semanticscholar.org/graph/v1";
 
 // Francesco Guerra's Semantic Scholar author ID.
-// Obtained by searching the S2 API for "Francesco Guerra" + "Modena".
-// Set env var S2_AUTHOR_ID to override.
-const KNOWN_S2_AUTHOR_ID = process.env.S2_AUTHOR_ID ?? null;
+// https://www.semanticscholar.org/author/Francesco-Guerra/2165249842
+const KNOWN_S2_AUTHOR_ID = process.env.S2_AUTHOR_ID ?? "2165249842";
 
 async function findAuthorId(): Promise<string | null> {
   // 1. Use hardcoded/env ID if available

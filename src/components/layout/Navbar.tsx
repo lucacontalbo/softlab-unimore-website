@@ -32,8 +32,8 @@ export default function Navbar() {
     ? "bg-transparent"
     : "bg-white/97 backdrop-blur-md shadow-sm border-b border-slate-100";
 
-  const linkColor   = isHome && !scrolled ? "text-white/75 hover:text-white" : "text-slate-600 hover:text-[#E5332A]";
-  const activeColor = isHome && !scrolled ? "text-white font-semibold"        : "text-[#E5332A] font-semibold";
+  const linkColor   = isHome && !scrolled ? "text-white/75 hover:text-white" : "text-slate-600 hover:text-slate-900";
+  const activeColor = isHome && !scrolled ? "text-white font-semibold"        : "text-cyan-600 font-semibold";
   const logoColor   = isHome && !scrolled ? "text-white"                      : "text-[#58585A]";
   const subColor    = isHome && !scrolled ? "text-white/45"                   : "text-slate-400";
 
@@ -44,7 +44,7 @@ export default function Navbar() {
 
           {/* DTALab logo mark */}
           <Link href="/" className="flex items-center gap-2.5 shrink-0 group">
-            <Image src="/images/dtalab-logo.svg" alt="DTALab"
+            <Image src="/images/dtalab-logo.png" alt="DTALab"
                    width={90} height={34} className={`h-8 w-auto transition-all ${isHome && !scrolled ? "brightness-0 invert" : ""}`} />
           </Link>
 
@@ -61,7 +61,7 @@ export default function Navbar() {
           {/* Unimore logo (desktop right) */}
           <div className="hidden lg:flex items-center border-l pl-4 shrink-0"
                style={{ borderColor: isHome && !scrolled ? "rgba(255,255,255,0.2)" : "#E5E7EB" }}>
-            <Image src="/images/unimore-logo.svg" alt="UNIMORE"
+            <Image src="/images/unimore-logo.png" alt="UNIMORE"
                    width={110} height={25}
                    className={`h-7 w-auto transition-all ${isHome && !scrolled ? "brightness-0 invert opacity-60" : "opacity-90"}`} />
           </div>
@@ -81,14 +81,14 @@ export default function Navbar() {
             {NAV_LINKS.map((link) => (
               <Link key={link.href} href={link.href} onClick={() => setMenuOpen(false)}
                     className={`px-4 py-3 rounded-lg text-sm font-medium transition-all ${
-                      pathname === link.href ? "bg-red-50 text-[#E5332A]" : "text-slate-700 hover:bg-slate-50"
+                      pathname === link.href ? "bg-cyan-50 text-cyan-700" : "text-slate-700 hover:bg-slate-50"
                     }`}>
                 {link.label}
               </Link>
             ))}
           </nav>
           <div className="px-8 pb-4 pt-1 border-t border-slate-100">
-            <Image src="/images/unimore-logo.svg" alt="UNIMORE" width={110} height={25}
+            <Image src="/images/unimore-logo.png" alt="UNIMORE" width={110} height={25}
                    className="h-6 w-auto opacity-50" />
           </div>
         </div>
