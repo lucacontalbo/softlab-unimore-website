@@ -6,45 +6,45 @@ import Footer from "@/components/layout/Footer";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://softlab.unimore.it";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://dtalab.unimore.it";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "SoftLab | University of Modena and Reggio Emilia",
-    template: "%s | SoftLab UNIMORE",
+    default: "DTALab | University of Modena and Reggio Emilia",
+    template: "%s | DTALab UNIMORE",
   },
   description:
-    "SoftLab is a research laboratory at the University of Modena and Reggio Emilia focused on Software Engineering, Data Integration, Entity Matching, NLP, and Machine Learning.",
+    "DTALab is a research laboratory at the University of Modena and Reggio Emilia focused on Data Analytics, Text Analytics, Entity Matching, NLP, and Machine Learning.",
   keywords: [
-    "SoftLab",
+    "DTALab",
     "UNIMORE",
-    "software engineering",
+    "data analytics",
+    "text analytics",
     "data integration",
     "entity matching",
     "NLP",
     "machine learning",
     "natural language processing",
-    "time series",
-    "anomaly detection",
+    "big data",
     "University of Modena",
   ],
-  authors: [{ name: "SoftLab UNIMORE" }],
-  creator: "SoftLab UNIMORE",
+  authors: [{ name: "DTALab UNIMORE" }],
+  creator: "DTALab UNIMORE",
   openGraph: {
     type: "website",
     locale: "en_US",
     url: SITE_URL,
-    siteName: "SoftLab UNIMORE",
-    title: "SoftLab | University of Modena and Reggio Emilia",
+    siteName: "DTALab UNIMORE",
+    title: "DTALab | University of Modena and Reggio Emilia",
     description:
-      "Research laboratory at UNIMORE specialising in data integration, entity matching, NLP, and machine learning.",
-    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "SoftLab UNIMORE" }],
+      "Research laboratory at UNIMORE specialising in data analytics, text analytics, entity matching, and machine learning.",
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "DTALab UNIMORE" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "SoftLab UNIMORE",
-    description: "Research in data integration, entity matching, NLP & ML.",
+    title: "DTALab UNIMORE",
+    description: "Research in data analytics, text analytics, entity matching & ML.",
     images: ["/og-image.png"],
   },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true } },
@@ -54,11 +54,11 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "ResearchOrganization",
-  name: "SoftLab",
-  alternateName: "Software Engineering & Data Analysis Laboratory",
+  name: "DTALab",
+  alternateName: "Data and Text Analytics Laboratory",
   url: SITE_URL,
-  logo: `${SITE_URL}/logo.svg`,
-  email: "softlab@unimore.it",
+  logo: `${SITE_URL}/images/unimore-logo.svg`,
+  email: "dtalab@unimore.it",
   address: {
     "@type": "PostalAddress",
     streetAddress: "Via Pietro Vivarelli, 10",

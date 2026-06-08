@@ -21,28 +21,56 @@ interface S2Paper {
 
 const S2_BASE = "https://api.semanticscholar.org/graph/v1";
 
-async function findAuthorId(name: string, affiliation: string): Promise<string | null> {
-  const res = await fetch(
-    `${S2_BASE}/author/search?query=${encodeURIComponent(name + " " + affiliation)}&fields=name,affiliations,paperCount&limit=5`,
-    { next: { revalidate: 86400 } }
-  );
-  if (!res.ok) return null;
-  const data = (await res.json()) as { data: S2Author[] };
-  const author = data.data?.find(
-    (a) =>
-      a.name.toLowerCase().includes("guerra") &&
-      (a.affiliations?.some((aff) => aff.toLowerCase().includes("modena")) ?? false)
-  );
-  return author?.authorId ?? null;
+// Francesco Guerra's Semantic Scholar author ID.
+// Obtained by searching the S2 API for "Francesco Guerra" + "Modena".
+// Set env var S2_AUTHOR_ID to override.
+const KNOWN_S2_AUTHOR_ID = process.env.S2_AUTHOR_ID ?? null;
+
+async function findAuthorId(): Promise<string | null> {
+  // 1. Use hardcoded/env ID if available
+  if (KNOWN_S2_AUTHOR_ID) return KNOWN_S2_AUTHOR_ID;
+
+  // 2. Try multiple search strategies
+  const queries = [
+    "Francesco Guerra Modena",
+    "Francesco Guerra UNIMORE entity matching",
+    "Francesco Guerra data integration NLP",
+  ];
+
+  for (const q of queries) {
+    try {
+      const res = await fetch(
+        `${S2_BASE}/author/search?query=${encodeURIComponent(q)}&fields=name,affiliations,paperCount&limit=10`,
+        { signal: AbortSignal.timeout(10000) }
+      );
+      if (!res.ok) continue;
+      const data = (await res.json()) as { data: S2Author[] };
+      const author = data.data?.find(
+        (a) =>
+          a.name.toLowerCase().includes("guerra") &&
+          (
+            (a.affiliations?.some((aff) =>
+              aff.toLowerCase().includes("modena") ||
+              aff.toLowerCase().includes("unimore") ||
+              aff.toLowerCase().includes("reggio")
+            )) ?? false
+          )
+      );
+      if (author?.authorId) return author.authorId;
+    } catch {
+      // try next query
+    }
+  }
+  return null;
 }
 
 async function fetchPapersByAuthorId(authorId: string): Promise<Publication[]> {
   const fields = "title,year,venue,citationCount,abstract,authors,externalIds,url";
   const res = await fetch(
-    `${S2_BASE}/author/${authorId}/papers?fields=${fields}&limit=100`,
-    { next: { revalidate: 3600 } }
+    `${S2_BASE}/author/${authorId}/papers?fields=${fields}&limit=200`,
+    { signal: AbortSignal.timeout(20000) }
   );
-  if (!res.ok) throw new Error(`Semantic Scholar API error: ${res.status}`);
+  if (!res.ok) throw new Error(`Semantic Scholar API error: ${res.status} ${res.statusText}`);
   const data = (await res.json()) as { data: S2Paper[] };
 
   return data.data
@@ -52,12 +80,16 @@ async function fetchPapersByAuthorId(authorId: string): Promise<Publication[]> {
       id: p.paperId,
       title: p.title,
       authors: p.authors.map((a) => a.name),
-      venue: p.venue ?? "Unknown Venue",
+      venue: p.venue ?? "",
       year: p.year ?? 0,
       citations: p.citationCount,
       abstract: p.abstract ?? "",
       doi: p.externalIds?.DOI ?? null,
-      url: p.url ?? (p.externalIds?.ArXiv ? `https://arxiv.org/abs/${p.externalIds.ArXiv}` : null),
+      url:
+        p.url ??
+        (p.externalIds?.ArXiv
+          ? `https://arxiv.org/abs/${p.externalIds.ArXiv}`
+          : null),
       tags: [],
       featured: false,
     }));
@@ -66,9 +98,16 @@ async function fetchPapersByAuthorId(authorId: string): Promise<Publication[]> {
 export async function refreshPublicationsFromSemanticScholar(): Promise<{
   publications: Publication[];
   source: string;
+  authorId: string;
 }> {
-  const authorId = await findAuthorId("Francesco Guerra", "Modena");
-  if (!authorId) throw new Error("Author not found in Semantic Scholar");
+  const authorId = await findAuthorId();
+  if (!authorId) {
+    throw new Error(
+      "Could not find Francesco Guerra on Semantic Scholar. " +
+      "Set the S2_AUTHOR_ID environment variable to their Semantic Scholar author ID " +
+      "(find it at https://www.semanticscholar.org/author/Francesco-Guerra)."
+    );
+  }
   const publications = await fetchPapersByAuthorId(authorId);
-  return { publications, source: "semantic_scholar" };
+  return { publications, source: "semantic_scholar", authorId };
 }

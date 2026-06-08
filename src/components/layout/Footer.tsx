@@ -9,14 +9,13 @@ export default function Footer() {
   try { site = getSiteConfig(); } catch { site = null; }
 
   return (
-    <footer className="bg-[#001A3D] text-white">
+    <footer className="bg-[#2B2B2B] text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           {/* Brand */}
           <div>
-            <div className="text-2xl font-black tracking-tight mb-1">
-              DTA<span className="text-white/40">Lab</span>
-            </div>
+            <Image src="/images/dtalab-logo.svg" alt="DTALab" width={110} height={42}
+                   className="h-10 w-auto mb-3 brightness-0 invert" />
             <p className="text-white/50 text-xs mb-4 uppercase tracking-wider">Data and Text Analytics Laboratory</p>
             <p className="text-white/60 text-sm leading-relaxed mb-5">
               {site?.department ?? "Department of Engineering Enzo Ferrari"}<br />

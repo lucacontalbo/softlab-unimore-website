@@ -1,4 +1,52 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 60" role="img" aria-label="UNIMORE – Università degli Studi di Modena e Reggio Emilia">
-  <text x="0" y="42" font-family="Georgia, serif" font-size="48" font-weight="700" fill="#003B71" letter-spacing="1">unimore</text>
-  <text x="1" y="56" font-family="Arial, sans-serif" font-size="7" fill="#003B71" letter-spacing="0.5">UNIVERSITÀ DEGLI STUDI DI MODENA E REGGIO EMILIA</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 90" role="img" aria-label="UNIMORE – Università degli Studi di Modena e Reggio Emilia">
+  <!-- Circular heraldic seal -->
+  <circle cx="44" cy="45" r="42" fill="none" stroke="#58585A" stroke-width="1.2"/>
+  <circle cx="44" cy="35" r="27" fill="none" stroke="#58585A" stroke-width="0.4"/>
+
+  <!-- Circular text (top arc) -->
+  <defs>
+    <path id="topArc" d="M 5,45 a 39,39 0 0,1 78,0"/>
+    <path id="botArc" d="M 11,60 a 39,39 0 0,0 66,0"/>
+  </defs>
+  <text font-family="serif" font-size="5" fill="#58585A" letter-spacing="1.6">
+    <textPath href="#topArc" startOffset="3%">UNIVERSITAS STUDIORUM MUTINENSIS</textPath>
+  </text>
+  <text font-family="serif" font-size="5" fill="#58585A" letter-spacing="1.2">
+    <textPath href="#botArc" startOffset="20%">ET REGIENSIS</textPath>
+  </text>
+
+  <!-- Year 1175 -->
+  <text x="44" y="78" font-family="serif" font-size="6" fill="#58585A" text-anchor="middle" letter-spacing="1">1175</text>
+
+  <!-- Knight on horseback (silhouette) -->
+  <g fill="#58585A" transform="translate(17,12)">
+    <!-- Horse body -->
+    <ellipse cx="27" cy="24" rx="15" ry="8"/>
+    <!-- Horse neck -->
+    <rect x="36" y="12" width="7" height="12" rx="3" transform="rotate(-20,36,12)"/>
+    <!-- Horse head -->
+    <ellipse cx="42" cy="10" rx="5" ry="4" transform="rotate(-10,42,10)"/>
+    <!-- Front legs (raised) -->
+    <rect x="32" y="29" width="3.5" height="10" rx="1.5" transform="rotate(-20,32,29)"/>
+    <rect x="37" y="28" width="3.5" height="8" rx="1.5" transform="rotate(15,37,28)"/>
+    <!-- Rear legs -->
+    <rect x="14" y="29" width="3.5" height="11" rx="1.5" transform="rotate(-5,14,29)"/>
+    <rect x="19" y="30" width="3.5" height="10" rx="1.5"/>
+    <!-- Tail -->
+    <path d="M 12,24 Q 4,30 7,37" stroke="#58585A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <!-- Rider body -->
+    <ellipse cx="32" cy="14" rx="5" ry="9" transform="rotate(-5,32,14)"/>
+    <!-- Rider head (helmet) -->
+    <circle cx="34" cy="5" r="4.5"/>
+    <rect x="30" y="5" width="8" height="2" rx="1" fill="#58585A"/>
+    <!-- Lance -->
+    <line x1="37" y1="8" x2="53" y2="-4" stroke="#58585A" stroke-width="1.3" stroke-linecap="round"/>
+  </g>
+
+  <!-- UNIMORE wordmark -->
+  <text x="102" y="53" font-family="Arial, Helvetica, sans-serif" font-size="40" font-weight="700" fill="#58585A" letter-spacing="0.5">UNI</text>
+  <text x="207" y="53" font-family="Arial, Helvetica, sans-serif" font-size="40" font-weight="700" fill="#E5332A" letter-spacing="0.5">MORE</text>
+
+  <!-- Subtitle -->
+  <text x="102" y="70" font-family="Arial, Helvetica, sans-serif" font-size="8.8" fill="#58585A" letter-spacing="0.3">UNIVERSITÀ DEGLI STUDI DI MODENA E REGGIO EMILIA</text>
 </svg>
