@@ -57,6 +57,9 @@ export default function TeamPage() {
                 <p className="font-bold text-slate-900 text-sm leading-tight">
                   {m.name} {m.surname}
                 </p>
+                {m.role && (
+                  <p className="text-xs text-slate-500 mt-1 leading-snug">{m.role}</p>
+                )}
                 {m.email && (
                   <a
                     href={`mailto:${m.email}`}

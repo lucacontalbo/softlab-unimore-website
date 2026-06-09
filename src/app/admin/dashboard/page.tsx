@@ -161,7 +161,7 @@ export default function AdminDashboard() {
   }
 
   function addTeamMember() {
-    const m: TeamMember = { id: genId(), name: "", surname: "", email: "", image: "", order: team.length + 1 };
+    const m: TeamMember = { id: genId(), name: "", surname: "", role: "", email: "", image: "", order: team.length + 1 };
     setTeam(prev => [...prev, m]);
     setEditTeamId(m.id);
   }
@@ -317,7 +317,10 @@ export default function AdminDashboard() {
                       <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#003B71] to-[#005BAE] flex items-center justify-center text-white text-sm font-bold shrink-0">
                         {m.name?.[0] ?? "?"}{m.surname?.[0] ?? ""}
                       </div>
-                      <span className="font-semibold text-slate-800">{m.name || m.surname ? `${m.name} ${m.surname}` : <span className="text-slate-400 italic">New member</span>}</span>
+                      <div>
+                        <span className="font-semibold text-slate-800">{m.name || m.surname ? `${m.name} ${m.surname}` : <span className="text-slate-400 italic">New member</span>}</span>
+                        {m.role && <p className="text-xs text-slate-400 mt-0.5">{m.role}</p>}
+                      </div>
                     </div>
                     <div className="flex gap-2">
                       <button onClick={() => setEditTeamId(editTeamId === m.id ? null : m.id)}
@@ -334,6 +337,9 @@ export default function AdminDashboard() {
                     <div className="border-t border-slate-100 px-5 py-4 grid grid-cols-2 gap-4 bg-slate-50">
                       <FieldInput label="Name" value={m.name} onChange={v => updateTeamMember(m.id, { name: v })} />
                       <FieldInput label="Surname" value={m.surname} onChange={v => updateTeamMember(m.id, { surname: v })} />
+                      <div className="col-span-2">
+                        <FieldInput label="Role (e.g. PhD Student, Post-Doc, Professor)" value={m.role ?? ""} onChange={v => updateTeamMember(m.id, { role: v })} placeholder="e.g. Assistant Professor" />
+                      </div>
                       <FieldInput label="Email (optional)" value={m.email ?? ""} onChange={v => updateTeamMember(m.id, { email: v })} type="email" />
                       <FieldInput label="Image URL (optional)" value={m.image ?? ""} onChange={v => updateTeamMember(m.id, { image: v })} />
                       <FieldInput label="Order" value={String(m.order)} onChange={v => updateTeamMember(m.id, { order: Number(v) })} type="number" />
