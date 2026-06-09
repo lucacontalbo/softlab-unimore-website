@@ -161,7 +161,7 @@ export default function AdminDashboard() {
   }
 
   function addTeamMember() {
-    const m: TeamMember = { id: genId(), name: "", surname: "", role: "", bio: "", email: "", image: "", order: team.length + 1 };
+    const m: TeamMember = { id: genId(), name: "", surname: "", role: "", bio: "", former: false, email: "", image: "", order: team.length + 1 };
     setTeam(prev => [...prev, m]);
     setEditTeamId(m.id);
   }
@@ -323,7 +323,10 @@ export default function AdminDashboard() {
                       </div>
                       <div>
                         <span className="font-semibold text-slate-800">{m.name || m.surname ? `${m.name} ${m.surname}` : <span className="text-slate-400 italic">New member</span>}</span>
-                        {m.role && <p className="text-xs text-slate-400 mt-0.5">{m.role}</p>}
+                        <div className="flex items-center gap-2 mt-0.5">
+                          {m.role && <p className="text-xs text-slate-400">{m.role}</p>}
+                          {m.former && <span className="text-xs bg-slate-100 text-slate-500 px-1.5 py-0.5 rounded font-medium">Former</span>}
+                        </div>
                       </div>
                     </div>
                     <div className="flex gap-2">
@@ -350,6 +353,12 @@ export default function AdminDashboard() {
                       <FieldInput label="Email (optional)" value={m.email ?? ""} onChange={v => updateTeamMember(m.id, { email: v })} type="email" />
                       <FieldInput label="Image URL (optional)" value={m.image ?? ""} onChange={v => updateTeamMember(m.id, { image: v })} />
                       <FieldInput label="Order" value={String(m.order)} onChange={v => updateTeamMember(m.id, { order: Number(v) })} type="number" />
+                      <label className="flex items-center gap-2 cursor-pointer select-none">
+                        <input type="checkbox" checked={m.former ?? false}
+                          onChange={e => updateTeamMember(m.id, { former: e.target.checked })}
+                          className="w-4 h-4 rounded border-slate-300 text-cyan-600 focus:ring-cyan-500" />
+                        <span className="text-sm text-slate-600">Former member</span>
+                      </label>
                     </div>
                   )}
                 </div>

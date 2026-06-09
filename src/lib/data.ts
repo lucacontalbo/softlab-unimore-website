@@ -34,6 +34,7 @@ export interface TeamMember {
   surname: string;
   role?: string;
   bio?: string;
+  former?: boolean;
   email?: string;
   image?: string;
   order: number;
