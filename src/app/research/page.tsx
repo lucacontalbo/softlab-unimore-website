@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { getResearchAreas } from "@/lib/data";
 import { GitMerge, MessageSquare, TrendingUp, Database, AlertTriangle, Share2 } from "lucide-react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 export const metadata: Metadata = {
   title: "Research",
@@ -58,7 +60,14 @@ export default async function ResearchPage() {
                     <h2 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-cyan-700 transition-colors">
                       {area.title}
                     </h2>
-                    <p className="text-slate-500 leading-relaxed mb-5">{area.description}</p>
+                    <div className="prose prose-sm prose-slate max-w-none mb-5
+                      prose-headings:font-bold prose-headings:text-slate-800 prose-headings:mt-4 prose-headings:mb-2
+                      prose-p:text-slate-500 prose-p:leading-relaxed prose-p:my-2
+                      prose-li:text-slate-500 prose-ul:my-2 prose-ol:my-2
+                      prose-a:text-cyan-600 prose-a:no-underline hover:prose-a:underline
+                      prose-strong:text-slate-700">
+                      <ReactMarkdown remarkPlugins={[remarkGfm]}>{area.description}</ReactMarkdown>
+                    </div>
                     <div className="flex flex-wrap gap-2">
                       {area.topics.map((topic) => (
                         <span key={topic} className="tag">{topic}</span>

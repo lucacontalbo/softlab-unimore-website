@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import MarkdownEditor from "@/components/admin/MarkdownEditor";
 import {
   Users, Newspaper, FlaskConical, Settings, BookOpen, RefreshCw,
   LogOut, Save, Plus, Trash2, ChevronDown, ChevronUp,
@@ -450,7 +451,7 @@ export default function AdminDashboard() {
                   {editResearchId === r.id && (
                     <div className="border-t border-slate-100 px-5 py-4 space-y-3 bg-slate-50">
                       <FieldInput label="Title" value={r.title} onChange={v => updateResearchArea(r.id, { title: v })} />
-                      <FieldInput label="Description" value={r.description} onChange={v => updateResearchArea(r.id, { description: v })} type="textarea" />
+                      <MarkdownEditor label="Description" value={r.description} onChange={v => updateResearchArea(r.id, { description: v })} placeholder="Describe this research area. Markdown is supported." />
                       <div className="grid grid-cols-3 gap-3">
                         <FieldInput label="Icon name (Lucide)" value={r.icon} onChange={v => updateResearchArea(r.id, { icon: v })} />
                         <FieldInput label="Color (hex)" value={r.color} onChange={v => updateResearchArea(r.id, { color: v })} />
