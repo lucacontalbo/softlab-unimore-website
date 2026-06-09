@@ -168,7 +168,11 @@ export default function AdminDashboard() {
   function updateTeamMember(id: string, patch: Partial<TeamMember>) {
     setTeam(prev => prev.map(m => m.id === id ? { ...m, ...patch } : m));
   }
-  function deleteTeamMember(id: string) { setTeam(prev => prev.filter(m => m.id !== id)); }
+  function deleteTeamMember(id: string) {
+    const updated = team.filter(m => m.id !== id);
+    setTeam(updated);
+    saveData("/api/admin/team", updated, "Member removed.");
+  }
 
   function addNewsItem() {
     const n: NewsItem = { id: genId(), slug: "", title: "", date: new Date().toISOString().slice(0,10), category: "Research", excerpt: "", content: "", featured: false, author: "" };
@@ -351,7 +355,7 @@ export default function AdminDashboard() {
                 </div>
               ))}
             </div>
-            {team.length > 0 && (
+            {(
               <button onClick={() => saveData("/api/admin/team", team, "Team saved!")} disabled={saving} className="btn-primary mt-6">
                 <Save className="w-4 h-4" /> {saving ? "Saving…" : "Save Team"}
               </button>
