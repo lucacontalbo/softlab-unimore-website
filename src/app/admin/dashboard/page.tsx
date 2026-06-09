@@ -161,7 +161,7 @@ export default function AdminDashboard() {
   }
 
   function addTeamMember() {
-    const m: TeamMember = { id: genId(), name: "", surname: "", role: "", email: "", image: "", order: team.length + 1 };
+    const m: TeamMember = { id: genId(), name: "", surname: "", role: "", bio: "", email: "", image: "", order: team.length + 1 };
     setTeam(prev => [...prev, m]);
     setEditTeamId(m.id);
   }
@@ -339,6 +339,9 @@ export default function AdminDashboard() {
                       <FieldInput label="Surname" value={m.surname} onChange={v => updateTeamMember(m.id, { surname: v })} />
                       <div className="col-span-2">
                         <FieldInput label="Role (e.g. PhD Student, Post-Doc, Professor)" value={m.role ?? ""} onChange={v => updateTeamMember(m.id, { role: v })} placeholder="e.g. Assistant Professor" />
+                      </div>
+                      <div className="col-span-2">
+                        <FieldInput label="Short Bio (optional)" value={m.bio ?? ""} onChange={v => updateTeamMember(m.id, { bio: v })} type="textarea" placeholder="A few sentences about this person's research interests and background." />
                       </div>
                       <FieldInput label="Email (optional)" value={m.email ?? ""} onChange={v => updateTeamMember(m.id, { email: v })} type="email" />
                       <FieldInput label="Image URL (optional)" value={m.image ?? ""} onChange={v => updateTeamMember(m.id, { image: v })} />

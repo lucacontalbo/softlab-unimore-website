@@ -60,6 +60,9 @@ export default function TeamPage() {
                 {m.role && (
                   <p className="text-xs text-slate-500 mt-1 leading-snug">{m.role}</p>
                 )}
+                {m.bio && (
+                  <p className="text-xs text-slate-400 mt-2 leading-relaxed line-clamp-4">{m.bio}</p>
+                )}
                 {m.email && (
                   <a
                     href={`mailto:${m.email}`}
