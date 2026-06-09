@@ -34,21 +34,18 @@ export default function AdminLoginPage() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-[#020617] px-4">
-      {/* Top accent bar */}
       <div className="fixed top-0 left-0 right-0 h-1 bg-[#E5332A]" />
 
       <div className="w-full max-w-sm">
-        {/* Logo block */}
         <div className="text-center mb-8">
           <div className="flex justify-center mb-4">
-            <Image src="/images/dtalab-logo.png" alt="DTALab" width={140} height={53}
+            <Image src="/images/dtalab-logo.svg" alt="DTALab" width={140} height={53}
                    className="h-14 w-auto brightness-0 invert" />
           </div>
           <h1 className="text-xl font-bold text-white tracking-tight">Admin Panel</h1>
           <p className="text-slate-500 text-sm mt-1">Sign in to manage your website</p>
         </div>
 
-        {/* Card */}
         <div className="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur-sm shadow-2xl">
           {error && (
             <div className="flex items-center gap-2 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm mb-5">
@@ -88,9 +85,8 @@ export default function AdminLoginPage() {
           </form>
         </div>
 
-        {/* Unimore logo */}
         <div className="flex justify-center mt-8 opacity-25">
-          <Image src="/images/unimore-logo.png" alt="UNIMORE" width={120} height={28}
+          <Image src="/images/unimore-logo.svg" alt="UNIMORE" width={120} height={28}
                  className="h-7 w-auto brightness-0 invert" />
         </div>
 

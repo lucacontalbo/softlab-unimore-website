@@ -44,7 +44,7 @@ export default function Navbar() {
 
           {/* DTALab logo mark */}
           <Link href="/" className="flex items-center gap-2.5 shrink-0 group">
-            <Image src="/images/dtalab-logo.png" alt="DTALab"
+            <Image src="/images/dtalab-logo.svg" alt="DTALab"
                    width={90} height={34} className={`h-8 w-auto transition-all ${isHome && !scrolled ? "brightness-0 invert" : ""}`} />
           </Link>
 
@@ -61,7 +61,7 @@ export default function Navbar() {
           {/* Unimore logo (desktop right) */}
           <div className="hidden lg:flex items-center border-l pl-4 shrink-0"
                style={{ borderColor: isHome && !scrolled ? "rgba(255,255,255,0.2)" : "#E5E7EB" }}>
-            <Image src="/images/unimore-logo.png" alt="UNIMORE"
+            <Image src="/images/unimore-logo.svg" alt="UNIMORE"
                    width={110} height={25}
                    className={`h-7 w-auto transition-all ${isHome && !scrolled ? "brightness-0 invert opacity-60" : "opacity-90"}`} />
           </div>
@@ -88,7 +88,7 @@ export default function Navbar() {
             ))}
           </nav>
           <div className="px-8 pb-4 pt-1 border-t border-slate-100">
-            <Image src="/images/unimore-logo.png" alt="UNIMORE" width={110} height={25}
+            <Image src="/images/unimore-logo.svg" alt="UNIMORE" width={110} height={25}
                    className="h-6 w-auto opacity-50" />
           </div>
         </div>

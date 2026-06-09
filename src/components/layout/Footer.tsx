@@ -14,7 +14,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           {/* Brand */}
           <div>
-            <Image src="/images/dtalab-logo.png" alt="DTALab" width={110} height={42}
+            <Image src="/images/dtalab-logo.svg" alt="DTALab" width={110} height={42}
                    className="h-10 w-auto mb-3 brightness-0 invert" />
             <p className="text-white/50 text-xs mb-4 uppercase tracking-wider">Data and Text Analytics Laboratory</p>
             <p className="text-white/60 text-sm leading-relaxed mb-5">
@@ -84,7 +84,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="border-t border-white/10 mt-10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-white/35 text-xs">© {year} DTALab – University of Modena and Reggio Emilia. All rights reserved.</p>
-          <Image src="/images/unimore-logo.png" alt="UNIMORE" width={90} height={22}
+          <Image src="/images/unimore-logo.svg" alt="UNIMORE" width={90} height={22}
                  className="h-6 w-auto brightness-0 invert opacity-40" />
         </div>
       </div>

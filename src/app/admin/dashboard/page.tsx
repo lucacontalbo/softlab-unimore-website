@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import {
   Users, Newspaper, FlaskConical, Settings, BookOpen, RefreshCw,
   LogOut, Save, Plus, Trash2, ChevronDown, ChevronUp,
@@ -223,9 +224,10 @@ export default function AdminDashboard() {
     <div className="min-h-screen bg-slate-50 flex">
       {/* Sidebar */}
       <aside className="hidden lg:flex flex-col w-56 bg-[#001A3D] shrink-0">
-        <div className="p-6 border-b border-white/10">
-          <span className="text-white font-black text-lg">DTA<span className="text-white/40">Lab</span></span>
-          <p className="text-white/40 text-xs mt-0.5">Admin Panel</p>
+        <div className="p-5 border-b border-white/10">
+          <Image src="/images/dtalab-logo.svg" alt="DTALab" width={100} height={38}
+                 className="h-9 w-auto brightness-0 invert mb-1" />
+          <p className="text-white/40 text-xs">Admin Panel</p>
         </div>
         <nav className="flex-1 py-4 px-3 flex flex-col gap-1">
           {TABS.map(t => (

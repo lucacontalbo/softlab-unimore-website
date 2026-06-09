@@ -29,10 +29,10 @@ export default function Hero() {
           </span>
         </div>
 
-        {/* DTALab logo — user must place public/images/dtalab-logo.png */}
+        {/* DTALab logo — user must place public/images/dtalab-logo.svg */}
         <div className="animate-fade-up opacity-0 delay-200 flex justify-center mb-5">
           <Image
-            src="/images/dtalab-logo.png"
+            src="/images/dtalab-logo.svg"
             alt="DTALab"
             width={220}
             height={80}
@@ -63,10 +63,10 @@ export default function Hero() {
           </Link>
         </div>
 
-        {/* Unimore logo watermark — user must place public/images/unimore-logo.png */}
+        {/* Unimore logo watermark — user must place public/images/unimore-logo.svg */}
         <div className="animate-fade-in opacity-0 delay-700 mt-14">
           <Image
-            src="/images/unimore-logo.png"
+            src="/images/unimore-logo.svg"
             alt="UNIMORE"
             width={240}
             height={55}
